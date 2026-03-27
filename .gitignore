@@ -1,0 +1,75 @@
+# =========================
+# UNITY GENERATED
+# =========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# =========================
+# IDE (Visual Studio / Rider / VSCode)
+# =========================
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Rider
+.idea/
+
+# VSCode
+.vscode/
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# BUILD OUTPUT
+# =========================
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+
+# =========================
+# CACHE / LOG
+# =========================
+*.log
+*.cache
+
+# =========================
+# IL2CPP / DOTS
+# =========================
+il2cppOutput/
+[Dd]otsBuild/
+
+# =========================
+# CRASH REPORT
+# =========================
+crashlytics-build.properties
+
+# =========================
+# IMPORTANT: KEEP META FILES
+# =========================
+!*.meta
+
+# =========================
+# PACKAGE FILES
+# =========================
+Packages/*.tgz
+Assets/Editor/Migration/*.tgz

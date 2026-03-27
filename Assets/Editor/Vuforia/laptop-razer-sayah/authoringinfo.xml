@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.4.1">
+        <ModelTarget name="lapro44444" targetId="0de5800f82694b5699fa5c8730e3aecd" bbox="-0.156958 -0.0307361 -0.0787636 0.157062 0.194395 0.140256" version="14.0" toolVersion="v7.4.1" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="lapro444444" targetId="d3049551806b4fdeaefd0881c0bd8e7a" bbox="-0.156958 -0.0307361 -0.0787636 0.157062 0.194395 0.140256" version="14.0" toolVersion="v7.4.1" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="lapro44444" assemblyId="8c86ebf8057e499ea36da52f035d878b">
+        <Part name="lapro44444" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="lapro444444" assemblyId="3a4492b2df154144ba0f1e33140c3afd">
+        <Part name="lapro444444" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <ModelTargetDatabase mtDBid="d397a49849fc4ad998df0d28e8dd85a4" name="laptop-razer-sayah" toolVersion="v7.4.1" version="36.0" />
+</QCARInfo>
