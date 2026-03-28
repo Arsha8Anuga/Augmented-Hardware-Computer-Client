@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d29044f9fd2531458a178ed4c85b97f, type: 3}
-  m_Name: RAM_Data
+  m_Name: HDD_Data
   m_EditorClassIdentifier: 
-  id: RAM-3
-  title: this is ram
-  description: desc
+  id: HDD-1
+  title: This is HDD
+  description: Desc

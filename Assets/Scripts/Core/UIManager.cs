@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [Header("UI Root")]
+    public Canvas canvasRoot;
     public GameObject mainUI;
     public GameObject focusUI;
 
@@ -11,6 +12,14 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI modeText;
+
+    public void SetCanvasRoot(bool active)
+    {
+        if (canvasRoot != null)
+        {
+            canvasRoot.gameObject.SetActive(active);
+        }
+    }
 
     public void ShowMainUI()
     {

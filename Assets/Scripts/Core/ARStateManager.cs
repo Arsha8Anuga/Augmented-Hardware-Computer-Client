@@ -19,6 +19,7 @@ public class ARStateManager : MonoBehaviour
     public float lostDelay = 3f;
     private float lostTimer = 0f;
     private bool isTargetVisible = true;
+    private bool pendingReset = false;
 
     [Header("Objects")]
     public GameObject surfaceObj;
@@ -61,25 +62,29 @@ public class ARStateManager : MonoBehaviour
 
             if(lostTimer >= lostDelay)
             {
-                ResetState();
+                pendingReset = true; // tandai niat reset
             }
         }
         else
         {
-            lostTimer = 0f;
+            if (pendingReset)
+            {
+                ResetState();      // baru reset sekarang
+                pendingReset = false;
+            }
+
+            lostTimer = 0f;        // reset timer
         }
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            SetState(AppState.SURFACE_STATE);
             SetTargetVisible(true);
         }
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            SetState(AppState.HARDWARE_STATE);
+            SetTargetVisible(false);
         }
-
     }
 
     public GameObject GetFocusObject(HardwareType type)
@@ -95,10 +100,15 @@ public class ARStateManager : MonoBehaviour
     public void SetTargetVisible(bool visible)
     {
         isTargetVisible = visible;
+        lostTimer = visible? 0f : lostTimer;
 
-        if (visible)
+        surfaceObj.SetActive(visible && currentState == AppState.SURFACE_STATE);
+        hardwareObj.SetActive(visible && currentState == AppState.HARDWARE_STATE);
+        focusObj.SetActive(visible);
+
+        if(uIManager != null)
         {
-            lostTimer = 0f;
+            uIManager.SetCanvasRoot(visible);
         }
     }
 
@@ -146,8 +156,6 @@ public class ARStateManager : MonoBehaviour
         
         surfaceObj.SetActive(newState == AppState.SURFACE_STATE);
         hardwareObj.SetActive(newState == AppState.HARDWARE_STATE);
-
-        
         
         if (focusObj != null)
         {
