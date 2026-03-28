@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public enum HardwareType
 {
     CPU,
@@ -12,6 +13,7 @@ public enum HardwareType
 
 public class ARStateManager : MonoBehaviour
 {   
+    public SimpleFadeMove hardwareAnim;
     [Header("State")]
     public AppState currentState = AppState.SURFACE_STATE;
 
@@ -156,6 +158,11 @@ public class ARStateManager : MonoBehaviour
         
         surfaceObj.SetActive(newState == AppState.SURFACE_STATE);
         hardwareObj.SetActive(newState == AppState.HARDWARE_STATE);
+
+        if(newState == AppState.HARDWARE_STATE && hardwareAnim != null)
+        {
+            hardwareAnim.Play();
+        }
         
         if (focusObj != null)
         {

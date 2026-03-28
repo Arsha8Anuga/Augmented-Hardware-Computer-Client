@@ -3223,6 +3223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295517902}
+  - component: {fileID: 295517903}
   m_Layer: 0
   m_Name: HardwareMode
   m_TagString: Untagged
@@ -3249,6 +3250,20 @@ Transform:
   - {fileID: 419799591}
   m_Father: {fileID: 478009385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295517903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295517901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b3311090b7af7418ae928db3d56e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.4
+  moveOffset: 0.05
 --- !u!1 &300470994
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,7 +4140,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1552599513}
   m_HandleRect: {fileID: 1552599512}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -20218,6 +20233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ce4bc3f00feda4098c9ad5b8b14ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hardwareAnim: {fileID: 295517903}
   currentState: 0
   lostDelay: 3
   surfaceObj: {fileID: 1152899135}
