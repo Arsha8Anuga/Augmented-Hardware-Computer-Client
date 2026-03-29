@@ -5307,6 +5307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530481648}
+  - component: {fileID: 530481649}
   m_Layer: 0
   m_Name: FocusMode
   m_TagString: Untagged
@@ -5342,6 +5343,20 @@ Transform:
   - {fileID: 1687283439}
   m_Father: {fileID: 478009385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530481649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530481647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b3311090b7af7418ae928db3d56e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.4
+  moveOffset: 0.05
 --- !u!1 &549151032
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,6 +9449,7 @@ GameObject:
   - component: {fileID: 881649162}
   - component: {fileID: 881649161}
   - component: {fileID: 881649160}
+  - component: {fileID: 881649163}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -9530,6 +9546,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881649158}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &881649163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881649158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214a39ba51704944aae00841eec2107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRotation: {x: 15, y: 25, z: 0}
+  introSpeed: 4
+  spinSpeed: 20
 --- !u!1 &885807627
 GameObject:
   m_ObjectHideFlags: 0
@@ -16979,6 +17010,7 @@ GameObject:
   - component: {fileID: 1687283442}
   - component: {fileID: 1687283441}
   - component: {fileID: 1687283440}
+  - component: {fileID: 1687283443}
   m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -17075,6 +17107,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687283438}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1687283443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687283438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214a39ba51704944aae00841eec2107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRotation: {x: 15, y: 25, z: 0}
+  introSpeed: 4
+  spinSpeed: 20
 --- !u!1 &1692801823
 GameObject:
   m_ObjectHideFlags: 0
@@ -17767,6 +17814,7 @@ GameObject:
   - component: {fileID: 1804694948}
   - component: {fileID: 1804694947}
   - component: {fileID: 1804694946}
+  - component: {fileID: 1804694949}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -17863,6 +17911,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804694944}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1804694949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804694944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214a39ba51704944aae00841eec2107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRotation: {x: 15, y: 25, z: 0}
+  introSpeed: 4
+  spinSpeed: 20
 --- !u!1 &1828518857
 GameObject:
   m_ObjectHideFlags: 0
@@ -20234,6 +20297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardwareAnim: {fileID: 295517903}
+  focusAnim: {fileID: 530481649}
   currentState: 0
   lostDelay: 3
   surfaceObj: {fileID: 1152899135}
