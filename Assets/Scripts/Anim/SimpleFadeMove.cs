@@ -8,7 +8,7 @@ public class SimpleFadeMove : MonoBehaviour
 
     Vector3 startPos;
     Vector3 targetPos;
-    CanvasGroup canvasGroup;
+    Renderer[] renderers;
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class SimpleFadeMove : MonoBehaviour
         targetPos = startPos;
         startPos.y -= moveOffset;
 
-        canvasGroup = GetComponent<CanvasGroup>();
+        renderers = GetComponentsInChildren<Renderer>();
     }
 
     public void Play()
@@ -31,8 +31,7 @@ public class SimpleFadeMove : MonoBehaviour
 
         transform.localPosition = startPos;
 
-        if (canvasGroup != null)
-            canvasGroup.alpha = 0f;
+        SetAlpha(0f);
 
         while (t < duration)
         {
@@ -40,16 +39,25 @@ public class SimpleFadeMove : MonoBehaviour
             float p = t / duration;
 
             transform.localPosition = Vector3.Lerp(startPos, targetPos, p);
-
-            if (canvasGroup != null)
-                canvasGroup.alpha = Mathf.Lerp(0f, 1f, p);
+            SetAlpha(p);
 
             yield return null;
         }
 
         transform.localPosition = targetPos;
+        SetAlpha(1f);
+    }
 
-        if (canvasGroup != null)
-            canvasGroup.alpha = 1f;
+    void SetAlpha(float a)
+    {
+        foreach (var r in renderers)
+        {
+            foreach (var mat in r.materials)
+            {
+                Color c = mat.color;
+                c.a = a;
+                mat.color = c;
+            }
+        }
     }
 }
