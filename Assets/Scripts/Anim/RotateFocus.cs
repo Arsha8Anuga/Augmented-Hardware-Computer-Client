@@ -6,11 +6,22 @@ public class RotateFocus : MonoBehaviour
     public float introSpeed = 4f;
     public float spinSpeed = 20f;
 
+    public bool useScaleIntro = true;
+    public float scaleSpeed = 4f;
+
+    Vector3 targetScale;
     bool introDone = false;
 
     void OnEnable()
     {
         introDone = false;
+
+        targetScale = transform.localScale;
+
+        if(useScaleIntro)
+        {
+            transform.localScale = Vector3.zero;
+        }
     }
 
     void Update()
@@ -22,6 +33,15 @@ public class RotateFocus : MonoBehaviour
                 Quaternion.Euler(startRotation),
                 Time.deltaTime * introSpeed
             );
+
+            if(useScaleIntro)
+            {
+                transform.localScale = Vector3.Lerp(
+                    transform.localScale,
+                    targetScale,
+                    Time.deltaTime * scaleSpeed
+                );
+            }
 
             if (Quaternion.Angle(transform.localRotation, Quaternion.Euler(startRotation)) < 0.1f)
             {

@@ -5,18 +5,26 @@ public class SimpleFadeMove : MonoBehaviour
 {
     public float duration = 0.4f;
     public float moveOffset = 0.05f;
+    public bool scaleXOnly = true;
 
     Vector3 startPos;
     Vector3 targetPos;
-    Renderer[] renderers;
+
+    Vector3 startScale;
+    Vector3 targetScale;
 
     void Awake()
     {
-        startPos = transform.localPosition;
-        targetPos = startPos;
+        targetPos = transform.localPosition;
+        startPos = targetPos;
         startPos.y -= moveOffset;
 
-        renderers = GetComponentsInChildren<Renderer>();
+        targetScale = transform.localScale;
+
+        if(scaleXOnly)
+            startScale = new Vector3(0f, targetScale.y, targetScale.z);
+        else
+            startScale = Vector3.zero;
     }
 
     public void Play()
@@ -30,8 +38,7 @@ public class SimpleFadeMove : MonoBehaviour
         float t = 0f;
 
         transform.localPosition = startPos;
-
-        SetAlpha(0f);
+        transform.localScale = startScale;
 
         while (t < duration)
         {
@@ -39,25 +46,12 @@ public class SimpleFadeMove : MonoBehaviour
             float p = t / duration;
 
             transform.localPosition = Vector3.Lerp(startPos, targetPos, p);
-            SetAlpha(p);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, p);
 
             yield return null;
         }
 
         transform.localPosition = targetPos;
-        SetAlpha(1f);
-    }
-
-    void SetAlpha(float a)
-    {
-        foreach (var r in renderers)
-        {
-            foreach (var mat in r.materials)
-            {
-                Color c = mat.color;
-                c.a = a;
-                mat.color = c;
-            }
-        }
+        transform.localScale = targetScale;
     }
 }
