@@ -5,18 +5,26 @@ public class SimpleFadeMove : MonoBehaviour
 {
     public float duration = 0.4f;
     public float moveOffset = 0.05f;
+    public bool scaleXOnly = true;
 
     Vector3 startPos;
     Vector3 targetPos;
-    CanvasGroup canvasGroup;
+
+    Vector3 startScale;
+    Vector3 targetScale;
 
     void Awake()
     {
-        startPos = transform.localPosition;
-        targetPos = startPos;
+        targetPos = transform.localPosition;
+        startPos = targetPos;
         startPos.y -= moveOffset;
 
-        canvasGroup = GetComponent<CanvasGroup>();
+        targetScale = transform.localScale;
+
+        if(scaleXOnly)
+            startScale = new Vector3(0f, targetScale.y, targetScale.z);
+        else
+            startScale = Vector3.zero;
     }
 
     public void Play()
@@ -30,9 +38,7 @@ public class SimpleFadeMove : MonoBehaviour
         float t = 0f;
 
         transform.localPosition = startPos;
-
-        if (canvasGroup != null)
-            canvasGroup.alpha = 0f;
+        transform.localScale = startScale;
 
         while (t < duration)
         {
@@ -40,16 +46,12 @@ public class SimpleFadeMove : MonoBehaviour
             float p = t / duration;
 
             transform.localPosition = Vector3.Lerp(startPos, targetPos, p);
-
-            if (canvasGroup != null)
-                canvasGroup.alpha = Mathf.Lerp(0f, 1f, p);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, p);
 
             yield return null;
         }
 
         transform.localPosition = targetPos;
-
-        if (canvasGroup != null)
-            canvasGroup.alpha = 1f;
+        transform.localScale = targetScale;
     }
 }

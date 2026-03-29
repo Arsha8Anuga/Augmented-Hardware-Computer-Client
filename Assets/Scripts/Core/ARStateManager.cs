@@ -14,6 +14,7 @@ public enum HardwareType
 public class ARStateManager : MonoBehaviour
 {   
     public SimpleFadeMove hardwareAnim;
+    public SimpleFadeMove focusAnim;
     [Header("State")]
     public AppState currentState = AppState.SURFACE_STATE;
 
@@ -175,6 +176,11 @@ public class ARStateManager : MonoBehaviour
         if (newState == AppState.FOCUS_STATE && currentFocus != null)
         {
             currentFocus.SetActive(true);
+
+            if(focusAnim != null)
+            {
+                focusAnim.Play();
+            }
         }
 
         uIManager.UpdateModeText(newState);
