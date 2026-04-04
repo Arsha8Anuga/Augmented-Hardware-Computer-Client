@@ -8,10 +8,16 @@ public class UIManager : MonoBehaviour
     public GameObject mainUI;
     public GameObject focusUI;
 
+    [Header("Loading")]
+    public GameObject loadingUI; // panel / spinner
+
     [Header("Focus UI")]
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI modeText;
+
+    private string lastTitle;
+    private string lastDesc;
 
     public void SetCanvasRoot(bool active)
     {
@@ -26,26 +32,52 @@ public class UIManager : MonoBehaviour
         mainUI.SetActive(true);
         focusUI.SetActive(false);
     }
+
     public void ShowFocusUI()
     {
         mainUI.SetActive(false);
         focusUI.SetActive(true);
     }
+
     public void UpdateInfo(string title, string desc)
     {
+        lastTitle = title;
+        lastDesc = desc;
+
         titleText.text = title;
         descriptionText.text = desc;
-    }   
+    }
+
+    public void RefreshCurrentView()
+    {
+        if (!string.IsNullOrEmpty(lastTitle))
+        {
+            titleText.text = lastTitle;
+            descriptionText.text = lastDesc;
+        }
+    }
 
     public void UpdateModeText(AppState state)
     {
-        if(state == AppState.SURFACE_STATE)
+        if (state == AppState.SURFACE_STATE)
         {
             modeText.text = "Mode: Surface";
         }
-        else if(state == AppState.HARDWARE_STATE)
+        else if (state == AppState.HARDWARE_STATE)
         {
             modeText.text = "Mode: Hardware";
         }
-    }   
+        else if (state == AppState.FOCUS_STATE)
+        {
+            modeText.text = "Mode: Focus";
+        }
+    }
+
+    public void SetLoading(bool isLoading)
+    {
+        if (loadingUI != null)
+        {
+            loadingUI.SetActive(isLoading);
+        }
+    }
 }

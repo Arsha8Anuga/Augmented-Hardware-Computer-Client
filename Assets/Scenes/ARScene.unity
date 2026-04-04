@@ -13385,7 +13385,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084490649}
         m_TargetAssemblyTypeName: ARStateManager, Assembly-CSharp
-        m_MethodName: BackFromFocus
+        m_MethodName: SwitchMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

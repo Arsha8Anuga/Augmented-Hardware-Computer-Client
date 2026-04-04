@@ -1,22 +1,16 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public enum HardwareType
-{
-    CPU,
-    GPU,
-    RAM
-}
-
 public class ARStateManager : MonoBehaviour
-{   
+{
     public SimpleFadeMove hardwareAnim;
     public SimpleFadeMove focusAnim;
+
     [Header("State")]
     public AppState currentState = AppState.SURFACE_STATE;
+
+    [Header("API")]
+    public APIManager apiManager;
 
     [Header("Tracking")]
     public float lostDelay = 3f;
@@ -29,117 +23,86 @@ public class ARStateManager : MonoBehaviour
     public GameObject hardwareObj;
     public GameObject focusObj;
 
-    [Header("Focus Registry")]
-    public GameObject cpuFocus;
-    public GameObject gpuFocus;
-    public GameObject ramFocus;
+    [Header("Focus")]
     public GameObject currentFocus;
 
     [Header("UI")]
     public UIManager uIManager;
 
-    private Dictionary<HardwareType, GameObject> focusMap;
-
-    void Awake()
-    {
-        focusMap = new Dictionary<HardwareType, GameObject>()
-        {
-            {HardwareType.CPU, cpuFocus},
-            {HardwareType.RAM, ramFocus},
-            {HardwareType.GPU, gpuFocus}
-        };
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      SetState(currentState);
+        SetState(currentState);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isTargetVisible)
         {
             lostTimer += Time.deltaTime;
 
-            if(lostTimer >= lostDelay)
-            {
-                pendingReset = true; // tandai niat reset
-            }
+            if (lostTimer >= lostDelay)
+                pendingReset = true;
         }
         else
         {
             if (pendingReset)
             {
-                ResetState();      // baru reset sekarang
+                ResetState();
                 pendingReset = false;
             }
 
-            lostTimer = 0f;        // reset timer
+            lostTimer = 0f;
         }
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
-        {
             SetTargetVisible(true);
-        }
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
-        {
             SetTargetVisible(false);
-        }
-    }
-
-    public GameObject GetFocusObject(HardwareType type)
-    {
-        if (focusMap.TryGetValue(type, out GameObject obj))
-        {
-            return obj;
-        }
-
-        return null;
     }
 
     public void SetTargetVisible(bool visible)
     {
         isTargetVisible = visible;
-        lostTimer = visible? 0f : lostTimer;
+
+        if (visible)
+            lostTimer = 0f;
 
         surfaceObj.SetActive(visible && currentState == AppState.SURFACE_STATE);
         hardwareObj.SetActive(visible && currentState == AppState.HARDWARE_STATE);
-        focusObj.SetActive(visible);
+        focusObj.SetActive(visible && currentState == AppState.FOCUS_STATE);
 
-        if(uIManager != null)
-        {
+        if (uIManager != null)
             uIManager.SetCanvasRoot(visible);
-        }
     }
 
     public void SwitchMode()
     {
-        if(currentState == AppState.SURFACE_STATE)
-        {
+        if (currentState == AppState.SURFACE_STATE)
             SetState(AppState.HARDWARE_STATE);
-        }
-        else if(currentState == AppState.HARDWARE_STATE)
-        {
+        else if (currentState == AppState.HARDWARE_STATE)
             SetState(AppState.SURFACE_STATE);
-        }
     }
 
-    public void EnterFocus(GameObject target, HardwareData data)
+    public void EnterFocus(GameObject focusTarget, HardwareData data)
     {
-        if(currentState != AppState.HARDWARE_STATE)
+        if (currentState != AppState.HARDWARE_STATE)
         {
-            Debug.Log("Focus State hanya bisa dari Hardware State");
+            Debug.LogWarning("Masuk focus hanya dari HARDWARE_STATE");
             return;
         }
 
-        currentFocus = target;
-
-        if(uIManager != null)
+        if (apiManager != null && !apiManager.IsHardwareReady())
         {
-            uIManager.UpdateInfo(data.title, data.description);    
+            Debug.LogWarning("Data API belum siap");
+            return;
+        }
+
+        currentFocus = focusTarget;
+
+        if (uIManager != null)
+        {
+            uIManager.UpdateInfo(data.title, data.description);
         }
 
         SetState(AppState.FOCUS_STATE);
@@ -149,6 +112,7 @@ public class ARStateManager : MonoBehaviour
     {
         if (currentState == AppState.FOCUS_STATE)
         {
+            currentFocus = null;
             SetState(AppState.HARDWARE_STATE);
         }
     }
@@ -156,18 +120,56 @@ public class ARStateManager : MonoBehaviour
     void SetState(AppState newState)
     {
         currentState = newState;
-        
-        surfaceObj.SetActive(newState == AppState.SURFACE_STATE);
-        hardwareObj.SetActive(newState == AppState.HARDWARE_STATE);
 
-        if(newState == AppState.HARDWARE_STATE && hardwareAnim != null)
+        if (apiManager != null)
         {
-            hardwareAnim.Play();
+            if (newState == AppState.HARDWARE_STATE)
+            {
+                if (!apiManager.IsLoadingHardware())
+                {
+                    StartCoroutine(apiManager.FetchHardware(false, (success) =>
+                    {
+                        if (!success)
+                        {
+                            Debug.LogWarning("Gagal load hardware");
+                            return;
+                        }
+
+                        Debug.Log("Hardware ready (callback)");
+
+                        if (uIManager != null)
+                            uIManager.RefreshCurrentView();
+                    }));
+                }
+            }
+
+            if (newState == AppState.SURFACE_STATE)
+            {
+                if (!apiManager.IsLoadingSurface())
+                {
+                    StartCoroutine(apiManager.FetchSurface(false, (success) =>
+                    {
+                        if (!success)
+                        {
+                            Debug.LogWarning("Gagal load surface");
+                            return;
+                        }
+
+                        Debug.Log("Surface ready (callback)");
+
+                        if (uIManager != null)
+                            uIManager.RefreshCurrentView();
+                    }));
+                }
+            }
         }
-        
+
+        surfaceObj.SetActive(isTargetVisible && newState == AppState.SURFACE_STATE);
+        hardwareObj.SetActive(isTargetVisible && newState == AppState.HARDWARE_STATE);
+
         if (focusObj != null)
         {
-            foreach(Transform child in focusObj.transform)
+            foreach (Transform child in focusObj.transform)
             {
                 child.gameObject.SetActive(false);
             }
@@ -177,33 +179,34 @@ public class ARStateManager : MonoBehaviour
         {
             currentFocus.SetActive(true);
 
-            if(focusAnim != null)
-            {
+            if (focusAnim != null)
                 focusAnim.Play();
-            }
         }
 
-        uIManager.UpdateModeText(newState);
-
-        if(uIManager != null)
+        if (newState == AppState.HARDWARE_STATE && hardwareAnim != null)
         {
-            if(newState == AppState.FOCUS_STATE)
-            {
-                uIManager.ShowFocusUI();
-            }
-            else
-            {
-                uIManager.ShowMainUI();
-            }
+            hardwareAnim.Play();
         }
 
-        Debug.Log("Current State : " + currentState);
-    }
+        if (uIManager != null)
+        {
+            uIManager.UpdateModeText(newState);
 
+            if (newState == AppState.FOCUS_STATE)
+                uIManager.ShowFocusUI();
+            else
+                uIManager.ShowMainUI();
+
+            uIManager.SetLoading(
+                apiManager.IsLoadingHardware() || apiManager.IsLoadingSurface()
+            );
+        }
+
+        Debug.Log("Current State: " + currentState);
+    }
     void ResetState()
     {
         currentFocus = null;
         SetState(AppState.SURFACE_STATE);
     }
-
 }
