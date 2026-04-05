@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: DISPLAY-PORT_Data
   m_EditorClassIdentifier: 
-  id: DISPLAY-PORT-1
+  id: display-port-1
   title: Display Port
   description: Port untuk output video digital ke monitor eksternal dengan kualitas
     tinggi.

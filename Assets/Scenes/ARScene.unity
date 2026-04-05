@@ -1723,9 +1723,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 2e3dd14cc6541ed468ad3e734769b481, type: 3}
       insertIndex: -1
       addedObject: {fileID: 133900175}
-    - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 2e3dd14cc6541ed468ad3e734769b481, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 133900174}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 2e3dd14cc6541ed468ad3e734769b481, type: 3}
 --- !u!4 &133900172 stripped
 Transform:
@@ -1737,21 +1734,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7449782648777001352, guid: 2e3dd14cc6541ed468ad3e734769b481, type: 3}
   m_PrefabInstance: {fileID: 133900171}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &133900174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133900173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &133900175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2938,7 +2920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: DC-PORT-1
+  surfaceId: dc-port-1
   titleText: {fileID: 805857502}
   descText: {fileID: 1034305240}
 --- !u!1 &256690680
@@ -4432,9 +4414,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 240fc679f38b8c449a77c2905296879e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 459872874}
-    - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 240fc679f38b8c449a77c2905296879e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 459872873}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 240fc679f38b8c449a77c2905296879e, type: 3}
 --- !u!4 &459872871 stripped
 Transform:
@@ -4446,21 +4425,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7449782648777001352, guid: 240fc679f38b8c449a77c2905296879e, type: 3}
   m_PrefabInstance: {fileID: 459872870}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &459872873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459872872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &459872874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6381,7 +6345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: JACK-PORT-1
+  surfaceId: jack-port-1
   titleText: {fileID: 1491090056}
   descText: {fileID: 562175007}
 --- !u!1 &613509705
@@ -6786,7 +6750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: KEYBOARD-1
+  surfaceId: keyboard-1
   titleText: {fileID: 2064379773}
   descText: {fileID: 650576066}
 --- !u!1 &639706579
@@ -7400,7 +7364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: HDMI-PORT-1
+  surfaceId: hdmi-port-1
   titleText: {fileID: 634420596}
   descText: {fileID: 208725244}
 --- !u!1 &673839806
@@ -7728,7 +7692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: TOUCH-PAD-1
+  surfaceId: touch-pad-1
   titleText: {fileID: 1789328477}
   descText: {fileID: 995015699}
 --- !u!1 &715212865
@@ -8535,7 +8499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: MONITOR-1
+  surfaceId: monitor-1
   titleText: {fileID: 151717455}
   descText: {fileID: 642967539}
 --- !u!1 &800868287
@@ -8983,9 +8947,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 2cf7ee6d92f9d72469474767ac3ef2df, type: 3}
       insertIndex: -1
       addedObject: {fileID: 817714208}
-    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 2cf7ee6d92f9d72469474767ac3ef2df, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 817714207}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 2cf7ee6d92f9d72469474767ac3ef2df, type: 3}
 --- !u!4 &817714205 stripped
 Transform:
@@ -8997,21 +8958,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8771091787928289351, guid: 2cf7ee6d92f9d72469474767ac3ef2df, type: 3}
   m_PrefabInstance: {fileID: 817714204}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &817714207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817714206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &817714208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9488,9 +9434,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 31896b5d80f89b04d8ea6ddb7cb0a63b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 828861484}
-    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 31896b5d80f89b04d8ea6ddb7cb0a63b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 828861483}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 31896b5d80f89b04d8ea6ddb7cb0a63b, type: 3}
 --- !u!4 &828861481 stripped
 Transform:
@@ -9502,21 +9445,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8771091787928289351, guid: 31896b5d80f89b04d8ea6ddb7cb0a63b, type: 3}
   m_PrefabInstance: {fileID: 828861480}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &828861483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828861482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &828861484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9739,7 +9667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: DISPLAY-PORT-1
+  surfaceId: display-port-1
   titleText: {fileID: 4532633}
   descText: {fileID: 613509707}
 --- !u!1001 &862237436
@@ -11789,9 +11717,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1093574823}
-    - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1093574822}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
 --- !u!4 &1093574820 stripped
 Transform:
@@ -11803,21 +11728,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
   m_PrefabInstance: {fileID: 1093574819}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1093574822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093574821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &1093574823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12293,7 +12203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1152899136
 Transform:
   m_ObjectHideFlags: 0
@@ -13592,7 +13502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: THUNDERBOLT-PORT-1
+  surfaceId: thunderbolt-port-1
   titleText: {fileID: 1108229378}
   descText: {fileID: 908391144}
 --- !u!1 &1242266640
@@ -13844,9 +13754,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1260556934}
-    - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1260556933}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
 --- !u!4 &1260556931 stripped
 Transform:
@@ -13858,21 +13765,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7449782648777001352, guid: 340ea3d2770d3e542b913cd60e11eb9b, type: 3}
   m_PrefabInstance: {fileID: 1260556930}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1260556933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260556932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &1260556934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14084,7 +13976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740286a7b43eb264c825b21559d6d297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 1261004211}
 --- !u!1 &1264526319
 GameObject:
   m_ObjectHideFlags: 0
@@ -14305,10 +14197,10 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269470224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1001 &1289323247
 PrefabInstance:
@@ -15809,7 +15701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: USB-PORT-2
+  surfaceId: usb-port-2
   titleText: {fileID: 765366244}
   descText: {fileID: 1953742818}
 --- !u!1001 &1438099039
@@ -16497,9 +16389,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 3661eddceefc4ea409e3b1ea55774bcc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1485964152}
-    - targetCorrespondingSourceObject: {fileID: 7449782648777001352, guid: 3661eddceefc4ea409e3b1ea55774bcc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1485964151}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 3661eddceefc4ea409e3b1ea55774bcc, type: 3}
 --- !u!4 &1485964149 stripped
 Transform:
@@ -16511,21 +16400,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7449782648777001352, guid: 3661eddceefc4ea409e3b1ea55774bcc, type: 3}
   m_PrefabInstance: {fileID: 1485964148}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1485964151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485964150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &1485964152
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17257,7 +17131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589996e4a4d80124ebf93ea09b7b0a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUrl: http://you-api.com
+  baseUrl: http://192.168.100.41:8000/api/dashboard/ar%20project
 --- !u!114 &1526260122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17273,7 +17147,7 @@ MonoBehaviour:
   apiService: {fileID: 1526260121}
   registry: {fileID: 2084490654}
   endPoint: /surface
-  cooldown: 2
+  cooldown: 5
 --- !u!114 &1526260123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17289,7 +17163,7 @@ MonoBehaviour:
   apiService: {fileID: 1526260121}
   registry: {fileID: 2084490654}
   endPoint: /hardware
-  cooldown: 2
+  cooldown: 5
 --- !u!4 &1526260124
 Transform:
   m_ObjectHideFlags: 0
@@ -17485,7 +17359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: CAMERA-1
+  surfaceId: camera-1
   titleText: {fileID: 1713974263}
   descText: {fileID: 1494299432}
 --- !u!1 &1552599511
@@ -17931,7 +17805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: USB-PORT-1
+  surfaceId: usb-port-1
   titleText: {fileID: 1227341623}
   descText: {fileID: 1866101839}
 --- !u!1001 &1611480753
@@ -20505,9 +20379,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 32703d9c93792ef4f9407174f10afd0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997242858}
-    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 32703d9c93792ef4f9407174f10afd0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997242857}
   m_SourcePrefab: {fileID: -4161369568681901532, guid: 32703d9c93792ef4f9407174f10afd0d, type: 3}
 --- !u!4 &1997242855 stripped
 Transform:
@@ -20519,21 +20390,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8771091787928289351, guid: 32703d9c93792ef4f9407174f10afd0d, type: 3}
   m_PrefabInstance: {fileID: 1997242854}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1997242857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997242856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3c521bdf50df14ab54d2fd6241164c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  manager: {fileID: 0}
-  focusObject: {fileID: 0}
 --- !u!65 &1997242858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21461,7 +21317,7 @@ MonoBehaviour:
   apiHandler: {fileID: 2084490653}
   viewHandler: {fileID: 2084490652}
   uIManager: {fileID: 1269470229}
-  isTargetVisible: 0
+  isTargetVisible: 1
   currentFocus: {fileID: 0}
 --- !u!4 &2084490650
 Transform:
@@ -21508,7 +21364,7 @@ MonoBehaviour:
   hardwareAnim: {fileID: 295517903}
   focusAnim: {fileID: 530481649}
   worldTitleDisplay: {fileID: 1261004213}
-  dataRegistry: {fileID: 0}
+  dataRegistry: {fileID: 2084490654}
   uIManager: {fileID: 1269470229}
 --- !u!114 &2084490653
 MonoBehaviour:
@@ -21698,7 +21554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a08960c8bd83144b8f837dcbb812998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surfaceId: ETHERNET-PORT-1
+  surfaceId: ethernet-port-1
   titleText: {fileID: 557155038}
   descText: {fileID: 2022568882}
 --- !u!1 &2099147745

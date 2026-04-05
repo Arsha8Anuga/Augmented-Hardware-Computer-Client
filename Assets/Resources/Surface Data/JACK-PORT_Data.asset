@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: JACK-PORT_Data
   m_EditorClassIdentifier: 
-  id: JACK-PORT-1
+  id: jack-port-1
   title: Jack Port
   description: Port audio 3.5mm untuk headset atau speaker.

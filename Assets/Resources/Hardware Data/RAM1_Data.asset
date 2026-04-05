@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d29044f9fd2531458a178ed4c85b97f, type: 3}
   m_Name: RAM1_Data
   m_EditorClassIdentifier: 
-  id: RAM-1
-  title: This is RAM 1
-  description: Desc
+  id: ram-1
+  title: kingston
+  description: 8gb

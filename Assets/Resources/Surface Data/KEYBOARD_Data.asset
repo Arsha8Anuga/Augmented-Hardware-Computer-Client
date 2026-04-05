@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: KEYBOARD_Data
   m_EditorClassIdentifier: 
-  id: KEYBOARD-1
+  id: keyboard-1
   title: Keyboard
   description: Perangkat input utama untuk mengetik dan menjalankan perintah.

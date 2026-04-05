@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: MONITOR_Data
   m_EditorClassIdentifier: 
-  id: MONITOR-1
+  id: monitor-1
   title: Monitor
   description: Layar utama laptop untuk menampilkan sistem, aplikasi, dan visual
     pengguna

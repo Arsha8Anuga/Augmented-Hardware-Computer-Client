@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: TOUCH-PAD_Data
   m_EditorClassIdentifier: 
-  id: TOUCH-PAD-1
+  id: touch-pad-1
   title: Touch Pad
   description: Permukaan sentuh untuk menggerakkan kursor tanpa mouse.

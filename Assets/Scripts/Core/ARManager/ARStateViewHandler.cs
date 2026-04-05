@@ -12,38 +12,70 @@ public class ARStateViewHandler : MonoBehaviour
     public WorldTitleDisplay worldTitleDisplay;
 
     public DataRegistry dataRegistry;
-
     public UIManager uIManager;
 
     private SurfaceItemBinder[] surfaceBinders;
 
-    void Start()
+    public bool IsReady { get; private set; }
+
+    void Awake()
     {
-        surfaceBinders = surfaceObj.GetComponentsInChildren<SurfaceItemBinder>(true);
+        if (surfaceObj != null)
+        {
+            surfaceBinders = surfaceObj.GetComponentsInChildren<SurfaceItemBinder>(true);
+        }
+
+        IsReady = true;
     }
 
     public void ApplyState(AppState state, bool isVisible, GameObject currentFocus)
     {
-        surfaceObj.SetActive(isVisible && state == AppState.SURFACE_STATE);
-        hardwareObj.SetActive(isVisible && state == AppState.HARDWARE_STATE);
 
-        if(focusObj != null)
+        if (surfaceObj == null || hardwareObj == null)
+        {
+            Debug.LogError("Surface/Hardware object not assigned");
+            return;
+        }
+
+        if (!isVisible)
+        {
+            surfaceObj.SetActive(false);
+            hardwareObj.SetActive(false);
+
+            if (focusObj != null)
+            {
+                foreach (Transform child in focusObj.transform)
+                    child.gameObject.SetActive(false);
+            }
+
+            uIManager?.ShowMainUI(false);
+            uIManager?.ShowFocusUI(false);
+
+            return;
+        }
+
+        surfaceObj.SetActive(state == AppState.SURFACE_STATE);
+        hardwareObj.SetActive(state == AppState.HARDWARE_STATE);
+
+        if (focusObj != null)
         {
             foreach (Transform child in focusObj.transform)
-            {
                 child.gameObject.SetActive(false);
-            }
         }
 
         if (state == AppState.SURFACE_STATE)
         {
+            if (surfaceBinders == null || dataRegistry == null)
+                return;
+
             foreach (var binder in surfaceBinders)
             {
-                binder.Bind(dataRegistry);
+                if (binder != null)
+                    binder.Bind(dataRegistry);
             }
         }
 
-        if(state == AppState.FOCUS_STATE && currentFocus != null)
+        if (state == AppState.FOCUS_STATE && currentFocus != null)
         {
             currentFocus.SetActive(true);
             focusAnim?.Play();
@@ -57,15 +89,8 @@ public class ARStateViewHandler : MonoBehaviour
         if (uIManager != null)
         {
             uIManager.UpdateModeText(state);
-
-            if (state == AppState.FOCUS_STATE)
-            {
-                uIManager.ShowFocusUI();
-            }
-            else
-            {
-                uIManager.ShowMainUI();
-            }
+            uIManager.ShowMainUI(state != AppState.FOCUS_STATE);
+            uIManager.ShowFocusUI(state == AppState.FOCUS_STATE);
         }
 
         worldTitleDisplay?.Refresh();

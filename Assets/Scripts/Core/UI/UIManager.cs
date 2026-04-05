@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject focusUI;
 
     [Header("Loading")]
-    public GameObject loadingUI; 
+    public GameObject loadingUI;
 
     [Header("Focus UI")]
     public TextMeshProUGUI titleText;
@@ -18,29 +18,40 @@ public class UIManager : MonoBehaviour
 
     [Header("Interaction Control")]
     public CanvasGroup interactionGroup;
-    
 
     private string lastTitle;
     private string lastDesc;
 
+    private bool lastLoadingState = false;
+
     public void SetCanvasRoot(bool active)
     {
-        if (canvasRoot != null)
-        {
-            canvasRoot.gameObject.SetActive(active);
-        }
+        if (canvasRoot == null) return;
+
+        if (canvasRoot.gameObject.activeSelf == active)
+            return;
+
+        canvasRoot.gameObject.SetActive(active);
     }
 
-    public void ShowMainUI()
+    public void ShowMainUI(bool show)
     {
-        mainUI.SetActive(true);
-        focusUI.SetActive(false);
+        if (mainUI == null) return;
+
+        if (mainUI.activeSelf == show)
+            return;
+
+        mainUI.SetActive(show);
     }
 
-    public void ShowFocusUI()
+    public void ShowFocusUI(bool show)
     {
-        mainUI.SetActive(false);
-        focusUI.SetActive(true);
+        if (focusUI == null) return;
+
+        if (focusUI.activeSelf == show)
+            return;
+
+        focusUI.SetActive(show);
     }
 
     public void UpdateInfo(string title, string desc)
@@ -48,46 +59,40 @@ public class UIManager : MonoBehaviour
         lastTitle = title;
         lastDesc = desc;
 
-        titleText.text = title;
-        descriptionText.text = desc;
+        if (titleText != null)
+            titleText.text = string.IsNullOrEmpty(title) ? "-" : title;
+
+        if (descriptionText != null)
+            descriptionText.text = string.IsNullOrEmpty(desc) ? "-" : desc;
     }
 
     public void RefreshCurrentView()
     {
-        if (!string.IsNullOrEmpty(lastTitle))
-        {
-            titleText.text = lastTitle;
-            descriptionText.text = lastDesc;
-        }
+        if (titleText != null)
+            titleText.text = string.IsNullOrEmpty(lastTitle) ? "-" : lastTitle;
+
+        if (descriptionText != null)
+            descriptionText.text = string.IsNullOrEmpty(lastDesc) ? "-" : lastDesc;
     }
 
     public void UpdateModeText(AppState state)
     {
-        if (state == AppState.SURFACE_STATE)
-        {
-            modeText.text = "Mode: Surface";
-        }
-        else if (state == AppState.HARDWARE_STATE)
-        {
-            modeText.text = "Mode: Hardware";
-        }
-        else if (state == AppState.FOCUS_STATE)
-        {
-            modeText.text = "Mode: Focus";
-        }
+        if (modeText == null) return;
+
+        string mode = state.ToString().Replace("_STATE", "");
+        modeText.text = $"Mode: {mode}";
     }
 
     public void SetLoading(bool isLoading)
     {
-        if (loadingUI != null)
-        {
-            loadingUI.SetActive(isLoading);
-        }
+        Debug.Log("Loading: " + isLoading);
 
-        if (interactionGroup != null)
-        {
-            interactionGroup.interactable = !isLoading;
-            interactionGroup.blocksRaycasts = !isLoading;
-        }
+        if (lastLoadingState == isLoading)
+            return;
+
+        lastLoadingState = isLoading;
+
+        if (loadingUI != null)
+            loadingUI.SetActive(isLoading);
     }
 }

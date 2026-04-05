@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class SurfaceRepository : MonoBehaviour
 {
     public APIService apiService;
     public DataRegistry registry;
-
     public string endPoint;
 
     private DataCache<SurfaceDataAPI> cache = new();
@@ -18,10 +18,16 @@ public class SurfaceRepository : MonoBehaviour
     public IEnumerator Fetch(bool force = false, Action<bool> onDone = null)
     {
         if (isLoading)
+        {
+            onDone?.Invoke(false);
             yield break;
+        }
 
         if (!force && Time.time - lastFetchTime < cooldown)
+        {
+            onDone?.Invoke(false);
             yield break;
+        }
 
         isLoading = true;
         lastFetchTime = Time.time;
@@ -30,29 +36,55 @@ public class SurfaceRepository : MonoBehaviour
         {
             if (!success)
             {
+                isLoading = false;
                 onDone?.Invoke(false);
                 return;
             }
 
-            SurfaceDataList list = JsonUtility.FromJson<SurfaceDataList>(json);
-
-            cache.Clear();
-
-            foreach (var item in list.data)
+            try
             {
-                cache.Set(item.id, item);
+                SurfaceResponse response = JsonConvert.DeserializeObject<SurfaceResponse>(json);
 
-                var local = registry.GetSurface(item.id);
-                if (local != null)
+                if (response?.data == null)
                 {
-                    local.ApplyFromAPI(item);
+                    Debug.LogError("SurfaceResponse invalid");
+                    isLoading = false;
+                    onDone?.Invoke(false);
+                    return;
                 }
+
+                cache.Clear();
+
+                foreach (var pair in response.data)
+                {
+                    string id = pair.Key;
+                    var item = pair.Value;
+
+                    item.id = id;
+
+                    cache.Set(id, item);
+
+                    var local = registry.GetSurface(id);
+                    if (local != null)
+                    {
+                        local.ApplyFromAPI(item);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Surface tidak ditemukan di registry: {id}");
+                    }
+                }
+
+                onDone?.Invoke(true);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Surface deserialize error: " + e.Message);
+                onDone?.Invoke(false);
             }
 
-            onDone?.Invoke(true);
+            isLoading = false;
         });
-
-        isLoading = false;
     }
 
     public SurfaceDataAPI Get(string id)
@@ -63,5 +95,12 @@ public class SurfaceRepository : MonoBehaviour
     public bool IsReady()
     {
         return cache.HasData();
+    }
+
+    public bool CanFetch()
+    {
+        if (isLoading) return false;
+        if (Time.time - lastFetchTime < cooldown) return false;
+        return true;
     }
 }

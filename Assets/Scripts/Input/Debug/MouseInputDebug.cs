@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -8,73 +9,124 @@ public class MouseInputDebug : MonoBehaviour
 {
     void Start()
     {
-        Debug.Log("Script jalan");
+        Debug.Log("MouseInputDebug jalan");
         EnhancedTouchSupport.Enable();
     }
 
     void Update()
     {
+        HandleMouse();
+        HandleTouch();
+    }
 
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+    // ================= MOUSE =================
+    void HandleMouse()
+    {
+        if (Mouse.current == null) return;
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            Vector2 pos = Mouse.current.position.ReadValue();
+
+            Debug.Log("=== MOUSE CLICK ===");
+            ProcessInput(pos);
+        }
+    }
+
+    // ================= TOUCH =================
+    void HandleTouch()
+    {
+        if (Touch.activeTouches.Count == 0) return;
+
+        var touch = Touch.activeTouches[0];
+
+        Debug.Log("Touch phase: " + touch.phase);
+
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+        {
+            Debug.Log("=== TOUCH DETECTED ===");
+            ProcessInput(touch.screenPosition);
+        }
+    }
+
+    // ================= CORE =================
+    void ProcessInput(Vector2 screenPos)
+    {
+        bool isOverUI = IsPointerOverUI(screenPos);
+
+        Debug.Log("IsOverUI: " + isOverUI);
+
+        if (isOverUI)
+        {
+            Debug.Log("➡ Klik kena UI");
+            DebugUIRaycast(screenPos);
             return;
+        }
 
-            Debug.Log("Click detected");
+        Debug.Log("➡ Klik bukan UI → lanjut 3D");
 
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("3D Hit: " + hit.collider.name);
+
+            HardwarePart part = hit.collider.GetComponentInParent<HardwarePart>();
+
+            if (part != null)
             {
-                Debug.Log("Hit: " + hit.collider.name);
-
-                HardwarePart part = hit.collider.GetComponentInParent<HardwarePart>();
-
-                if (part != null)
-                {
-                    Debug.Log("HardwarePart ditemukan");
-                    part.OnClicked();
-                }
-                else
-                {
-                    Debug.Log("Tidak ada HardwarePart");
-                }
+                Debug.Log("HardwarePart ditemukan → trigger OnClicked()");
+                part.OnClicked();
             }
             else
             {
-                Debug.Log("Raycast tidak kena apa-apa");
+                Debug.Log("Tidak ada HardwarePart di object ini");
             }
         }
-
-        // TOUCH (untuk simulator / mobile)
-        if (Touch.activeTouches.Count > 0)
+        else
         {
-            var touch = Touch.activeTouches[0];
+            Debug.Log("Raycast tidak kena apa-apa");
+        }
+    }
 
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
-            {
-                Debug.Log("Touch detected");
+    // ================= UI CHECK =================
+    bool IsPointerOverUI(Vector2 position)
+    {
+        if (EventSystem.current == null)
+        {
+            Debug.LogWarning("EventSystem tidak ada!");
+            return false;
+        }
 
-                if (EventSystem.current.IsPointerOverGameObject())
-                    return;
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = position;
 
-                Ray ray = Camera.main.ScreenPointToRay(touch.screenPosition);
-                RaycastHit hit;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
 
-                if (Physics.Raycast(ray, out hit))
-                {
-                    Debug.Log("Hit: " + hit.collider.name);
+        return results.Count > 0;
+    }
 
-                    HardwarePart part = hit.collider.GetComponentInParent<HardwarePart>();
+    // ================= UI DEBUG =================
+    void DebugUIRaycast(Vector2 position)
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = position;
 
-                    if (part != null)
-                    {
-                        Debug.Log("HardwarePart ditemukan (touch)");
-                        part.OnClicked();
-                    }
-                }
-            }
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        Debug.Log("=== UI RAYCAST RESULTS ===");
+
+        foreach (var r in results)
+        {
+            Debug.Log($"UI Hit: {r.gameObject.name} | Depth: {r.depth}");
+        }
+
+        if (results.Count == 0)
+        {
+            Debug.Log("Tidak ada UI yang kena (aneh)");
         }
     }
 }

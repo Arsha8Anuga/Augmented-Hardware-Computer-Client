@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: ETHERNET-PORT_Data
   m_EditorClassIdentifier: 
-  id: ETHERNET-PORT-1
+  id: ethernet-port-1
   title: Ethernet Port
   description: Port kabel LAN untuk koneksi internet yang stabil.

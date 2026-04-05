@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: USB-PORT2_Data
   m_EditorClassIdentifier: 
-  id: USB-PORT-2
+  id: usb-port-2
   title: USB Port 2
   description: Port USB tambahan untuk menghubungkan perangkat USB lainnya.

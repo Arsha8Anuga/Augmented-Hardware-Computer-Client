@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: CAMERA_Data
   m_EditorClassIdentifier: 
-  id: CAMERA-1
+  id: camera-1
   title: Kamera
   description: Kamera bawaan laptop yang digunakan untuk video call, meeting online,
     dan pengambilan gambar

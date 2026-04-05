@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d29044f9fd2531458a178ed4c85b97f, type: 3}
   m_Name: SSD_Data
   m_EditorClassIdentifier: 
-  id: SSD-1
+  id: ssd-1
   title: This is SSD
   description: Desc

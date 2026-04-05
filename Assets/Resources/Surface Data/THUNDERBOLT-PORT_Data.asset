@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: THUNDERBOLT-PORT_Data
   m_EditorClassIdentifier: 
-  id: THUNDERBOLT-1
+  id: thunderbolt-port-1
   title: Thunderbolt Port
   description: Port berkecepatan tinggi untuk data, display, dan charging dalam satu
     koneksi.

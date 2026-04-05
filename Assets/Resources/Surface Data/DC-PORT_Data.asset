@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c7dd7e890cbbc43a23875e65f45474, type: 3}
   m_Name: DC-PORT_Data
   m_EditorClassIdentifier: 
-  id: DC-PORT-1
-  title: DC Port
-  description: Port untuk menghubungkan charger sebagai sumber daya listrik laptop.
+  id: dc-port-1
+  title: dc-port-1
+  description: this is dc

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d29044f9fd2531458a178ed4c85b97f, type: 3}
   m_Name: GPU-FAN_Data
   m_EditorClassIdentifier: 
-  id: GPU-FAN-1
+  id: gpu-fan-1
   title: This is GPU FAN
   description: Desc

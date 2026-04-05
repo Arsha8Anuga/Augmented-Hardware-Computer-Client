@@ -22,7 +22,7 @@ public class DataCache<T>
 
     public Dictionary<string, T> GetAll()
     {
-        return cache;
+        return new Dictionary<string, T>(cache);
     }
 
     public bool HasData()

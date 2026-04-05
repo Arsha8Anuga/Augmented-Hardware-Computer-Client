@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class AppInfoRepository : MonoBehaviour
 {
     public APIService apiService;
+    public string endPoint;
 
     private string cachedTitle;
-
-    public string endPoint;
 
     private float lastFetchTime = -10f;
     public float cooldown = 5f;
@@ -17,10 +17,16 @@ public class AppInfoRepository : MonoBehaviour
     public IEnumerator FetchTitle(bool force = false, Action<bool> onDone = null)
     {
         if (isLoading)
+        {
+            onDone?.Invoke(false);
             yield break;
+        }
 
         if (!force && Time.time - lastFetchTime < cooldown)
+        {
+            onDone?.Invoke(false);
             yield break;
+        }
 
         isLoading = true;
         lastFetchTime = Time.time;
@@ -29,17 +35,33 @@ public class AppInfoRepository : MonoBehaviour
         {
             if (!success)
             {
+                isLoading = false;
                 onDone?.Invoke(false);
                 return;
             }
 
-            TitleResponse res = JsonUtility.FromJson<TitleResponse>(json);
-            cachedTitle = res.data;
+            try
+            {
+                TitleResponse res = JsonConvert.DeserializeObject<TitleResponse>(json);
 
-            onDone?.Invoke(true);
+                if (res == null || string.IsNullOrEmpty(res.data))
+                {
+                    Debug.LogError("TitleResponse invalid");
+                    onDone?.Invoke(false);
+                    return;
+                }
+
+                cachedTitle = res.data;
+                onDone?.Invoke(true);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Title parse error: " + e.Message);
+                onDone?.Invoke(false);
+            }
+
+            isLoading = false;
         });
-
-        isLoading = false;
     }
 
     public string GetTitle()
@@ -50,5 +72,12 @@ public class AppInfoRepository : MonoBehaviour
     public bool HasTitle()
     {
         return !string.IsNullOrEmpty(cachedTitle);
+    }
+
+    public bool CanFetch()
+    {
+        if (isLoading) return false;
+        if (Time.time - lastFetchTime < cooldown) return false;
+        return true;
     }
 }

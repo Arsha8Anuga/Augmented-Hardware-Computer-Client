@@ -7,60 +7,57 @@ public class ARStateAPIHandler : MonoBehaviour
     public AppInfoRepository appInfoRepo;
 
     public WorldTitleDisplay worldTitleDisplay;
-
     public UIManager uiManager;
 
-    public void HandleState(AppState state)
+    public bool forceFetchMode = true; 
+
+    public void HandleState(AppState state, ARStateManager manager)
     {
+        bool forceFetch = forceFetchMode; // ambil dari setting
+
         if (state == AppState.HARDWARE_STATE)
         {
-            if (!hardwareRepo.IsReady())
+            if (hardwareRepo.CanFetch() || forceFetch)
             {
-                StartCoroutine(hardwareRepo.Fetch(false, (success) =>
+                manager.BeginLoading();
+                StartCoroutine(hardwareRepo.Fetch(forceFetch, (success) =>
                 {
-                    if (success && uiManager != null)
-                    {
-                        uiManager.RefreshCurrentView();
-                    }
+                    manager.EndLoading();
+                    if (success)
+                        uiManager?.RefreshCurrentView();
                 }));
             }
         }
 
         if (state == AppState.SURFACE_STATE)
         {
-            if (!surfaceRepo.IsReady())
+            if (surfaceRepo.CanFetch() || forceFetch)
             {
-                StartCoroutine(surfaceRepo.Fetch(false, (success) =>
+                manager.BeginLoading();
+                StartCoroutine(surfaceRepo.Fetch(forceFetch, (success) =>
                 {
-                    if (success && uiManager != null)
-                    {
-                        uiManager.RefreshCurrentView();
-                    }
+                    manager.EndLoading();
+                    if (success)
+                        uiManager?.RefreshCurrentView();
                 }));
             }
         }
 
-        // optional: load title sekali saja
-        if (appInfoRepo.HasTitle())
+
+        // TITLE
+        if (appInfoRepo.HasTitle() && !forceFetchMode)
         {
             worldTitleDisplay?.SetTitle(appInfoRepo.GetTitle());
         }
-        else
+        else if (appInfoRepo.CanFetch() || forceFetchMode)
         {
-            StartCoroutine(appInfoRepo.FetchTitle(false, (success) =>
+            manager.BeginLoading();
+            StartCoroutine(appInfoRepo.FetchTitle(forceFetchMode, (success) =>
             {
+                manager.EndLoading();
                 if (success)
-                {
                     worldTitleDisplay?.SetTitle(appInfoRepo.GetTitle());
-                }
             }));
         }
-    }
-
-    public bool IsLoading()
-    {
-        return !hardwareRepo.IsReady() || 
-               !surfaceRepo.IsReady() || 
-               !appInfoRepo.HasTitle();
     }
 }

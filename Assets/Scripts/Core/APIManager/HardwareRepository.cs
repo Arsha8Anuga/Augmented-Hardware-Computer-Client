@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Net;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class HardwareRepository : MonoBehaviour
@@ -19,11 +19,13 @@ public class HardwareRepository : MonoBehaviour
     {
         if (isLoading)
         {
+            onDone?.Invoke(false);
             yield break;
         }
 
-        if(!force && Time.time - lastFetchTime < cooldown)
+        if (!force && Time.time - lastFetchTime < cooldown)
         {
+            onDone?.Invoke(false);
             yield break;
         }
 
@@ -34,26 +36,54 @@ public class HardwareRepository : MonoBehaviour
         {
             if (!success)
             {
+                isLoading = false;
                 onDone?.Invoke(false);
                 return;
             }
 
-            HardwareDataList list = JsonUtility.FromJson<HardwareDataList>(json);
-
-            cache.Clear();
-
-            foreach (var item in list.data)
+            try
             {
-                cache.Set(item.id, item);
+                HardwareResponse response = JsonConvert.DeserializeObject<HardwareResponse>(json);
 
-                var local = registry.GetHardware(item.id);
-                if(local != null)
+                if (response?.data == null)
                 {
-                    local.ApplyFromAPI(item);
+                    Debug.LogError("HardwareResponse invalid");
+                    isLoading = false;
+                    onDone?.Invoke(false);
+                    return;
                 }
+
+                cache.Clear();
+
+                foreach (var pair in response.data)
+                {
+                    string id = pair.Key;
+                    var item = pair.Value;
+
+                    item.id = id;
+
+                    cache.Set(id, item);
+
+                    var local = registry.GetHardware(id);
+                    if (local != null)
+                    {
+                        local.ApplyFromAPI(item);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Hardware tidak ditemukan di registry: {id}");
+                    }
+                }
+
+                onDone?.Invoke(true);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Hardware deserialize error: " + e.Message);
+                onDone?.Invoke(false);
             }
 
-            onDone?.Invoke(true);
+            isLoading = false;
         });
     }
 
@@ -65,5 +95,12 @@ public class HardwareRepository : MonoBehaviour
     public bool IsReady()
     {
         return cache.HasData();
+    }
+
+    public bool CanFetch()
+    {
+        if (isLoading) return false;
+        if (Time.time - lastFetchTime < cooldown) return false;
+        return true;
     }
 }
