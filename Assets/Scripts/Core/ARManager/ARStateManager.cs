@@ -46,6 +46,21 @@ public class ARStateManager : MonoBehaviour
         Debug.Log("Current State: " + currentState);
     }
 
+    public void EnterFocus(GameObject focusObject, HardwareData data)
+    {
+        if (focusObject == null || data == null)
+            return;
+
+        currentFocus = focusObject;
+
+        if (uIManager != null)
+        {
+            uIManager.UpdateInfo(data.title, data.description);
+        }
+        
+        setState(AppState.FOCUS_STATE);
+    }
+
     void ResetState()
     {
         currentFocus = null;

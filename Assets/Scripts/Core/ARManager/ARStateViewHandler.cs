@@ -11,7 +11,16 @@ public class ARStateViewHandler : MonoBehaviour
 
     public WorldTitleDisplay worldTitleDisplay;
 
+    public DataRegistry dataRegistry;
+
     public UIManager uIManager;
+
+    private SurfaceItemBinder[] surfaceBinders;
+
+    void Start()
+    {
+        surfaceBinders = surfaceObj.GetComponentsInChildren<SurfaceItemBinder>(true);
+    }
 
     public void ApplyState(AppState state, bool isVisible, GameObject currentFocus)
     {
@@ -23,6 +32,14 @@ public class ARStateViewHandler : MonoBehaviour
             foreach (Transform child in focusObj.transform)
             {
                 child.gameObject.SetActive(false);
+            }
+        }
+
+        if (state == AppState.SURFACE_STATE)
+        {
+            foreach (var binder in surfaceBinders)
+            {
+                binder.Bind(dataRegistry);
             }
         }
 
