@@ -14150,6 +14150,7 @@ MonoBehaviour:
   canvasRoot: {fileID: 1269470227}
   mainUI: {fileID: 673839806}
   focusUI: {fileID: 1841891903}
+  loadingUI: {fileID: 0}
   titleText: {fileID: 103447113}
   descriptionText: {fileID: 1163970545}
   modeText: {fileID: 479931967}
@@ -21152,16 +21153,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ce4bc3f00feda4098c9ad5b8b14ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hardwareAnim: {fileID: 0}
+  hardwareAnim: {fileID: 295517903}
   focusAnim: {fileID: 530481649}
   currentState: 0
+  apiManager: {fileID: 0}
   lostDelay: 3
   surfaceObj: {fileID: 1152899135}
   hardwareObj: {fileID: 295517901}
   focusObj: {fileID: 530481647}
-  cpuFocus: {fileID: 1804694944}
-  gpuFocus: {fileID: 881649158}
-  ramFocus: {fileID: 1687283438}
   currentFocus: {fileID: 0}
   uIManager: {fileID: 1269470229}
 --- !u!4 &2084490650

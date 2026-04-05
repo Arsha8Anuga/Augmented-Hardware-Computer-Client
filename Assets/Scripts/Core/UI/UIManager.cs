@@ -9,12 +9,16 @@ public class UIManager : MonoBehaviour
     public GameObject focusUI;
 
     [Header("Loading")]
-    public GameObject loadingUI; // panel / spinner
+    public GameObject loadingUI; 
 
     [Header("Focus UI")]
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI modeText;
+
+    [Header("Interaction Control")]
+    public CanvasGroup interactionGroup;
+    
 
     private string lastTitle;
     private string lastDesc;
@@ -78,6 +82,12 @@ public class UIManager : MonoBehaviour
         if (loadingUI != null)
         {
             loadingUI.SetActive(isLoading);
+        }
+
+        if (interactionGroup != null)
+        {
+            interactionGroup.interactable = !isLoading;
+            interactionGroup.blocksRaycasts = !isLoading;
         }
     }
 }
