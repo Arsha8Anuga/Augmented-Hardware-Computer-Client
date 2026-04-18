@@ -5,16 +5,16 @@ public class FloatingLabel : MonoBehaviour
     public float amplitude = 0.005f;
     public float speed = 2f;
 
-    Vector3 startPos;
+    Vector3 basePos;
 
-    void Start()
+    void OnEnable()
     {
-        startPos = transform.localPosition;
+        basePos = transform.localPosition;
     }
 
     void Update()
     {
         float y = Mathf.Sin(Time.time * speed) * amplitude;
-        transform.localPosition = startPos + new Vector3(0, y, 0);
+        transform.localPosition = basePos + new Vector3(0, y, 0);
     }
 }
