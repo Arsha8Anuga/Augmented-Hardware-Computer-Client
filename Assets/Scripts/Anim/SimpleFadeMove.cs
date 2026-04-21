@@ -21,10 +21,20 @@ public class SimpleFadeMove : MonoBehaviour
 
         targetScale = transform.localScale;
 
-        if(scaleXOnly)
+        if (scaleXOnly)
             startScale = new Vector3(0f, targetScale.y, targetScale.z);
         else
             startScale = Vector3.zero;
+    }
+
+    void Start()
+    {
+        Play();
+    }
+
+    void OnEnable()
+    {
+        Play();
     }
 
     public void Play()

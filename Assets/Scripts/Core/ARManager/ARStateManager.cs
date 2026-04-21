@@ -51,12 +51,13 @@ public class ARStateManager : MonoBehaviour
         }
     }
 
-    public void setState(AppState newState)
+        public void setState(AppState newState)
     {
         currentState = newState;
 
         apiHandler?.HandleState(newState, this);
         viewHandler?.ApplyState(newState, isTargetVisible, currentFocus);
+
 
         Debug.Log("Current State: " + currentState);
     }
